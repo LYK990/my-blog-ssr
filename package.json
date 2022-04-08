@@ -8,7 +8,8 @@
     "preview": "vite preview",
     "lint:prettier": "prettier {src,mock}/**/*.{html,vue,css,sass,scss,ts,md} --write",
     "lint:eslint": "eslint {library,src}/**/*.{vue,ts,tsx} --fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint": "eslint src --fix --ext .ts,.tsx,.vue,.js,.jsx"
   },
   "lint-staged": {
     "*.{vue,js,ts}": "eslint --fix"
@@ -28,8 +29,11 @@
     "@vitejs/plugin-vue": "^2.3.0",
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "^3.3.0",
+    "cz-customizable": "^6.3.0",
     "eslint": "^8.12.0",
+    "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.6.0",
     "husky": "^7.0.0",
@@ -46,7 +50,7 @@
   },
   "config": {
     "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
+      "path": "./node_modules/cz-customizable"
     }
   }
 }

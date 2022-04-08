@@ -8,11 +8,13 @@ module.exports = {
   // 继承共享的配置
   extends: [
     'vue-global-api',
-    'plugin:prettier/recommended',
     'plugin:vue/vue3-recommended',
     'plugin:@typescript-eslint/recommended',
     '@vue/eslint-config-prettier',
-    'vue-global-api'
+    'vue-global-api',
+    'airbnb-base', // ++
+    'plugin:vue/essential',
+    'plugin:prettier/recommended' // 添加 prettier 插件
   ],
   parser: 'vue-eslint-parser',
   parserOptions: {
@@ -65,6 +67,11 @@ module.exports = {
         order: ['DEFINITION', 'LIST_RENDERING', 'CONDITIONALS']
       }
     ],
-    '@typescript-eslint/no-explicit-any': ['off']
+    '@typescript-eslint/no-explicit-any': ['off'],
+    'import/no-unresolved': 'off',
+    'import/extensions': 'off',
+    'import/no-absolute-path': 'off',
+    'import/no-extraneous-dependencies': 'off',
+    'no-param-reassign': 0
   }
-}
+};
