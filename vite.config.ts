@@ -1,0 +1,43 @@
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import { resolve } from 'path'
+// vite.config.ts
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import VueSetupExtend from 'vite-plugin-vue-setup-extend'
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [
+    vue(),
+    VueSetupExtend(),
+    AutoImport({
+      resolvers: [ElementPlusResolver()]
+    }),
+    Components({
+      resolvers: [ElementPlusResolver()]
+    })
+  ],
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, 'src') //设置@ 指向 src目录
+    }
+    //  extensions: ['.js', '.ts', '.jsx', '.tsx', '.json', '.vue'] //忽略后缀
+  },
+  base: './', //设置打包路径
+  server: {
+    port: 4000, //端口号
+    open: true, //是否自动打开浏览器
+    cors: true //允许跨域
+
+    // 设置代理，根据我们项目实际情况配置
+    // proxy: {
+    //   '/api': {
+    //     target: 'http://xxx.xxx.xxx.xxx:8000',
+    //     changeOrigin: true,
+    //     secure: false,
+    //     rewrite: (path) => path.replace('/api/', '/')
+    //   }
+    // }
+  }
+})
