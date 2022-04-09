@@ -16,14 +16,20 @@
       <el-button type="warning" plain disabled>Warning</el-button>
       <el-button type="danger" plain disabled>Danger</el-button>
     </el-row>
+
+    <Test />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import Test from './Test.vue';
 
 export default defineComponent({
-  name: 'Home'
+  name: 'Home',
+  components: {
+    Test
+  }
 });
 </script>
 

@@ -74,6 +74,7 @@ module.exports = {
     'import/no-absolute-path': 'off',
     'import/no-extraneous-dependencies': 'off',
     'no-param-reassign': 0,
-    'vue/multi-word-component-names': 0
+    'vue/multi-word-component-names': 0,
+    'no-unused-vars': 1 // 变量定义未使用
   }
 };
