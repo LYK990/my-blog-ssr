@@ -12,9 +12,10 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     '@vue/eslint-config-prettier',
     'vue-global-api',
-    'airbnb-base', // ++
+    'airbnb-base', // airbnb检查
     'plugin:vue/essential',
-    'plugin:prettier/recommended' // 添加 prettier 插件
+    'plugin:prettier/recommended', // 添加 prettier 插件
+    'plugin:jest/recommended' // 配置eslint忽略jest的语法检查
   ],
   parser: 'vue-eslint-parser',
   parserOptions: {
@@ -72,6 +73,7 @@ module.exports = {
     'import/extensions': 'off',
     'import/no-absolute-path': 'off',
     'import/no-extraneous-dependencies': 'off',
-    'no-param-reassign': 0
+    'no-param-reassign': 0,
+    'vue/multi-word-component-names': 0
   }
 };

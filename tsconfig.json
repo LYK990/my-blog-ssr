@@ -13,6 +13,7 @@
     "lib": ["esnext", "dom"],
     "experimentalDecorators": true,
     "baseUrl": "./",
+    "types": ["vite/client", "jest"],  //解决test方法报错问题
     "paths": {
       "@/*": ["src/*"]
     }
