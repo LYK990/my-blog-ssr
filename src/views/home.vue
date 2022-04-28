@@ -1,36 +1,43 @@
 <template>
   <div>
-    <el-row class="mb-4">
-      <el-button disabled>Default</el-button>
-      <el-button type="primary" disabled>Primary</el-button>
-      <el-button type="success" disabled>Success</el-button>
-      <el-button type="info" disabled>Info</el-button>
-      <el-button type="warning" disabled>Warning</el-button>
-      <el-button type="danger" disabled>Danger</el-button>
-    </el-row>
-    <el-row>
-      <el-button plain disabled>Plain</el-button>
-      <el-button type="primary" plain disabled>Primary</el-button>
-      <el-button type="success" plain disabled>Success</el-button>
-      <el-button type="info" plain disabled>Info</el-button>
-      <el-button type="warning" plain disabled>Warning</el-button>
-      <el-button type="danger" plain disabled>Danger</el-button>
-    </el-row>
-
-    <Test />
+    <div>
+      <video
+        style="width: 100%"
+        class="fullscreenVideo"
+        id="bgVid"
+        playsinline
+        autoplay
+        muted
+        loop
+        webkit-playsinline="true"
+        x-webkit-airplay="true"
+        x5-video-player-type="h5"
+        x5-video-player-fullscreen="true"
+        x5-video-ignore-metadata="true"
+      >
+        <source src="../assets/video/菜鸟图库-雨夜的交通.mp4" type="video/mp4" />
+      </video>
+    </div>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import Test from './Test.vue';
+<script lang="ts" setup name="Home">
+import { onMounted } from 'vue';
+import { getCaptcha } from '../api/index';
 
-export default defineComponent({
-  name: 'Home',
-  components: {
-    Test
-  }
+onMounted(async () => {
+  const result = await getCaptcha();
+  console.log(result);
 });
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less">
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+</style>

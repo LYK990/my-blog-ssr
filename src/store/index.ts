@@ -1,27 +1,28 @@
-import { createStore } from 'vuex';
+import { createStore, useStore as baseUseStore, Store } from 'vuex';
+import { InjectionKey } from 'vue';
 
-const defaultState = {
-  count: 0
-};
+export interface State {
+  count: number;
+  isCollapse: boolean;
+}
 
-// Create a new store instance.
-export default createStore({
+export const key: InjectionKey<Store<State>> = Symbol(1);
+
+export const store = createStore({
   state() {
-    return defaultState;
+    return {
+      count: 1,
+      isCollpase: false
+    };
   },
   mutations: {
-    increment(state: typeof defaultState) {
-      state.count += 1;
-    }
-  },
-  actions: {
-    increment(context) {
-      context.commit('increment');
-    }
-  },
-  getters: {
-    double(state: typeof defaultState) {
-      return 2 * state.count;
+    setIsCollapse(state: any, payload: any) {
+      state.isCollapse = payload;
     }
   }
 });
+
+// 定义自己的 `useStore` 组合式函数
+export function useStore() {
+  return baseUseStore(key);
+}
