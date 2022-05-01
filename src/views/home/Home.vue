@@ -1,15 +1,16 @@
 <template>
   <div>
-    <TopBar />
-    <BackGroundVideo />
+    <HomeOne />
+    <HomeTwo />
   </div>
 </template>
 
 <script lang="ts" setup name="Home">
 import { onMounted } from 'vue';
 import { getCaptcha } from '@/api/index';
-import BackGroundVideo from './backGroundVideo/BackGroundVideo.vue';
-import TopBar from './topBar/TopBar.vue';
+
+import HomeOne from './homeOne/HomeOne.vue';
+import HomeTwo from './homeTwo/HomeTwo.vue';
 
 onMounted(async () => {
   const result = await getCaptcha();

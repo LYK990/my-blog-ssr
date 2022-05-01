@@ -10,7 +10,7 @@
 <script lang="ts" setup name="TopBar"></script>
 <style lang="less" scoped>
 .topBar {
-  color: white;
+  color: yellowgreen;
   font-size: 16px;
   font-weight: 700;
 }
