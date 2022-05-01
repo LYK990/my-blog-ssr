@@ -37,7 +37,7 @@ body {
     /*加滤镜*/
     /*filter: blur(15px); //背景模糊设置 */
     /*-webkit-filter: grayscale(100%);*/
-    /*filter:grayscale(100%); //背景灰度设置*/
+    // filter: grayscale(80%); //背景灰度设置
     z-index: -9999;
   }
 }
