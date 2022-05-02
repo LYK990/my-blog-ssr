@@ -63,7 +63,9 @@
           <!--  -->
         </el-aside>
         <!-- main -->
-        <el-main># 1. 函数的call() / apply() / bind()</el-main>
+        <el-main>
+          <v-md-preview :text="str" />
+        </el-main>
       </el-container>
     </div>
   </div>
@@ -73,6 +75,7 @@
 import { ref } from 'vue';
 
 const activeNames = ref('');
+const str = ref('# 1. 函数的call() / apply() / bind()');
 </script>
 <style lang="less" scoped>
 .el-aside {
