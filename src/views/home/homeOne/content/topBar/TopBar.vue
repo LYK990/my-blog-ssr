@@ -7,7 +7,7 @@
     </div>
     <div class="center">
       <div>首页</div>
-      <div>分类</div>
+      <div @click="categoryAction">分类</div>
       <div>归档</div>
       <div>分享</div>
     </div>
@@ -17,7 +17,14 @@
   </header>
 </template>
 
-<script lang="ts" setup name="TopBar"></script>
+<script lang="ts" setup name="TopBar">
+import { useRouter } from 'vue-router';
+
+const router = useRouter()
+const categoryAction = () => {
+  router.push({ path: '/category' });
+};
+</script>
 <style lang="less" scoped>
 .topBar {
   color: white;
