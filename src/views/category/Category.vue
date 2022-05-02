@@ -12,7 +12,7 @@
 
 <script lang="ts" setup name="Category">
 import { useRouter } from 'vue-router';
-import Content from './content/content.vue';
+import Content from './content/Content.vue';
 
 const router = useRouter();
 const homeAction = () => {

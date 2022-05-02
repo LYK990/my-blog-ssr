@@ -69,7 +69,11 @@
   </div>
 </template>
 
-<script lang="ts" setup name="content"></script>
+<script lang="ts" setup name="Content">
+import { ref } from 'vue';
+
+const activeNames = ref('');
+</script>
 <style lang="less" scoped>
 .el-aside {
   padding: 1.5rem 0;
