@@ -4,8 +4,12 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
-    ElButton: typeof import('element-plus/es')['ElButton'];
+    ElAside: typeof import('element-plus/es')['ElAside']
+    ElCollapse: typeof import('element-plus/es')['ElCollapse']
+    ElCollapseItem: typeof import('element-plus/es')['ElCollapseItem']
+    ElContainer: typeof import('element-plus/es')['ElContainer']
+    ElMain: typeof import('element-plus/es')['ElMain']
   }
 }
 
-export {};
+export { }
