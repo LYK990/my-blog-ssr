@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import nprogress from 'nprogress';
 import 'nprogress/nprogress.css'; // npm i @types/nprogress类型补充
-import category from './modules/category'
+import category from './modules/category';
 
 const routes: Array<RouteRecordRaw> = [
   {
