@@ -8,11 +8,16 @@
     <div class="center">
       <div>首页</div>
       <div @click="categoryAction">分类</div>
-      <div>归档</div>
-      <div>分享</div>
+      <div @click="archiveAction">归档</div>
+      <div @click="shareAction">分享</div>
     </div>
     <div class="right">
-      <!-- <button>Default</button> -->
+      <div class="login">
+        <a>登录</a>
+      </div>
+      <div class="register">
+        <a>注册</a>
+      </div>
     </div>
   </header>
 </template>
@@ -20,16 +25,21 @@
 <script lang="ts" setup name="TopBar">
 import { useRouter } from 'vue-router';
 
-const router = useRouter()
+const router = useRouter();
 const categoryAction = () => {
   router.push({ path: '/category' });
+};
+const archiveAction = () => {
+  router.push({ path: '/archive' });
+};
+const shareAction = () => {
+  router.push({ path: '/share' });
 };
 </script>
 <style lang="less" scoped>
 .topBar {
   color: white;
   font-size: 16px;
-  // font-weight: 300;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -61,15 +71,14 @@ const categoryAction = () => {
   .right {
     width: 25%;
     display: flex;
-    justify-content: flex-end;
-    button {
-      width: 110px;
-      height: 36px;
+    justify-content: center;
+    a {
+      color: #fff;
+      font-size: 12px;
+    }
+    .login {
+      margin-right: 40px;
     }
   }
 }
-// .topBar:hover {
-//   background: white;
-//   color: black;
-// }
 </style>

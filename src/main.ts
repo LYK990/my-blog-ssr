@@ -14,6 +14,7 @@ import 'prismjs/components/prism-json';
 import router from './router/index';
 import { store, key } from './store';
 import App from './App.vue';
+import Header from '@/components/header/Header.vue';
 
 VMdPreview.use(vuepressTheme, {
   Prism
@@ -24,3 +25,5 @@ app.use(router);
 app.use(store, key);
 app.mount('#app');
 app.use(VMdPreview);
+
+app.component('Header', Header);

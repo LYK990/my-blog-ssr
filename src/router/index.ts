@@ -2,6 +2,8 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import nprogress from 'nprogress';
 import 'nprogress/nprogress.css'; // npm i @types/nprogress类型补充
 import category from './modules/category';
+import archive from './modules/archive';
+import share from './modules/share';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -9,7 +11,9 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Home',
     component: () => import('@/views/home/Home.vue')
   },
-  ...category
+  ...category,
+  ...archive,
+  ...share
 ];
 
 const router = createRouter({
