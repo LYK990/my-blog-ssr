@@ -14,31 +14,5 @@
 // const clientHeight = `${document.documentElement.clientHeight}px`;
 </script>
 <style lang="less">
-body {
-  margin: 0;
-  padding: 0;
-}
-.video {
-  video {
-    position: absolute;
-    top: 0;
-    // min-width: 99%;
-    // min-height: 100%;
-    height: 100%;
-    width: 100%;
-    object-fit: fill;
-    // position: absolute;
-    // top: 50%;
-    // left: 50%;
-    // transform: translate(-50%, -50%);
-    // object-fit: fill;
-    // height: 100%;
-    // width: 100%;
-    /*加滤镜*/
-    /*filter: blur(15px); //背景模糊设置 */
-    /*-webkit-filter: grayscale(100%);*/
-    // filter: grayscale(80%); //背景灰度设置
-    z-index: -9999;
-  }
-}
+@import url('@/style/home/backGroundVideo.less');
 </style>

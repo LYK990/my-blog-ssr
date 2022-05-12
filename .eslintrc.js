@@ -33,6 +33,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off', // 禁止使用debugger
     'no-undef': 'off', // 不能有未定义的变量
     'no-multi-spaces': 'error', // 禁止多个空格
+    '@typescript-eslint/no-var-requires': 0,
     /**
      * eslint-plugin-vue
      * https://eslint.vuejs.org/rules

@@ -13,7 +13,7 @@
 import { toRefs } from 'vue';
 import { useRouter } from 'vue-router';
 
-const props = defineProps({ title: { type: String, default: '文章分类' } });
+const props = defineProps({ title: { type: String, default: '' } });
 const { title } = toRefs(props);
 const router = useRouter();
 const homeAction = () => {

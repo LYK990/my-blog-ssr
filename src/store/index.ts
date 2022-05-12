@@ -19,7 +19,8 @@ export const store = createStore({
     setIsCollapse(state: any, payload: any) {
       state.isCollapse = payload;
     }
-  }
+  },
+  actions: {}
 });
 
 // 定义自己的 `useStore` 组合式函数

@@ -64,7 +64,8 @@
         </el-aside>
         <!-- main -->
         <el-main>
-          <v-md-preview :text="str" />
+          <!-- <v-md-preview :text="str" /> -->
+          qweqwe
         </el-main>
       </el-container>
     </div>

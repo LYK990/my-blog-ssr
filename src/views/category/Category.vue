@@ -1,6 +1,6 @@
 <template>
   <div class="category">
-    <Header />
+    <Header title="文章分类" />
     <Content />
   </div>
 </template>

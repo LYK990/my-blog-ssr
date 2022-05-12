@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHistory, RouteRecordRaw, createMemoryHistory } from 'vue-router';
 import nprogress from 'nprogress';
 import 'nprogress/nprogress.css'; // npm i @types/nprogress类型补充
 import category from './modules/category';
@@ -17,16 +17,16 @@ const routes: Array<RouteRecordRaw> = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: import.meta.env.SSR ? createMemoryHistory() : createWebHistory(),
   routes
 });
 
 router.beforeEach(() => {
-  nprogress.start();
+  // nprogress.start();
 });
 
 router.afterEach(() => {
-  nprogress.done();
+  // nprogress.done();
 });
 
 export default router;
