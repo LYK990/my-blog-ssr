@@ -16,10 +16,14 @@ const routes: Array<RouteRecordRaw> = [
   ...share
 ];
 
-const router = createRouter({
-  history: import.meta.env.SSR ? createMemoryHistory() : createWebHistory(),
-  routes
-});
+export default function createSSRRouter() {
+  return createRouter({
+    history: import.meta.env.SSR ? createMemoryHistory() : createWebHistory(),
+    routes
+  });
+}
+
+const router = createSSRRouter();
 
 router.beforeEach(() => {
   // nprogress.start();
@@ -28,5 +32,3 @@ router.beforeEach(() => {
 router.afterEach(() => {
   // nprogress.done();
 });
-
-export default router;

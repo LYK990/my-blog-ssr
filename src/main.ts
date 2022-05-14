@@ -11,8 +11,8 @@ import '@/style/resetcss.css';
 // // 代码高亮
 // import 'prismjs/components/prism-json';
 // 选择使用主题
-import router from './router/index';
-import { store, key } from './store';
+import createSSRRouter from './router/index';
+import { key, createSSRStore } from './store';
 import App from './App.vue';
 import Header from '@/components/header/Header.vue';
 
@@ -23,10 +23,12 @@ import Header from '@/components/header/Header.vue';
 
 export default function createApp() {
   const app = createSSRApp(App);
+  const store = createSSRStore();
+  const router = createSSRRouter();
   app.use(router);
   app.use(store, key);
   // app.use(VMdPreview);
   app.component('Header', Header);
 
-  return { app, router };
+  return { app, router, store };
 }

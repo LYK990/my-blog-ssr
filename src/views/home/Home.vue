@@ -5,16 +5,25 @@
   </div>
 </template>
 
-<script lang="ts" setup name="Home">
-import { onMounted } from 'vue';
+<script lang="ts">
+import { defineComponent, onMounted } from 'vue';
 import { getCaptcha } from '@/api/index';
-
 import HomeOne from './homeOne/HomeOne.vue';
-import HomeTwo from './homeTwo/HomeTwo.vue';
+// import HomeTwo from './homeTwo/HomeTwo.vue';
 
-onMounted(async () => {
-  const result = await getCaptcha();
-  console.log(result);
+export default defineComponent({
+  name: 'Home',
+  components: {
+    HomeOne
+    // HomeTwo
+  },
+  // setup() {},
+  asyncData({ store, route }: any) {
+    // onMounted(async () => {
+    //   const result = await getCaptcha();
+    //   console.log(result);
+    // });
+  }
 });
 </script>
 
