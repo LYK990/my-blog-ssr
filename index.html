@@ -6,9 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="http://at.alicdn.com/t/font_3371173_n9w5biqxkl.css">
     <title>Vite App</title>
+    <!--preload-link-->
   </head>
   <body>
     <div id="app"><!--ssr-outlet--></div>
     <script type="module" src="/src/entry-client.ts"></script>
+    <script>
+       window.__INITIAL_STATE__='<!--vuex-state-->';
+    </script>
   </body>
 </html>

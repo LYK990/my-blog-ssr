@@ -19,7 +19,16 @@
   </div>
 </template>
 
-<script lang="ts" setup name="Archive"></script>
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  name: 'Archive',
+  asyncData({ store, route }: any) {
+    console.log('async----', store, route);
+  }
+});
+</script>
 <style lang="less" scoped>
 .content {
   width: 30%;

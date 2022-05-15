@@ -7,8 +7,9 @@
     "serve": "vite",
     "dev:ssr": "cross-env NODE_ENV=development node server.js",
     "prod:ssr": "cross-env NODE_ENV=production node server.js",
-    "build:client": "vite build --outDir dist/client",
+    "build:client": "vite build --outDir dist/client --ssrManifest",
     "build:server": "vite build --outDir dist/server --ssr src/entry-server.ts",
+    "build:ssr": "npm run build:client && npm run build:server",
     "preview": "vite preview",
     "lint:prettier": "prettier {src,mock}/**/*.{html,vue,css,sass,scss,ts,md} --write",
     "lint:eslint": "eslint {library,src}/**/*.{vue,ts,tsx} --fix",
@@ -32,7 +33,8 @@
     "nprogress": "^0.2.0",
     "vue": "^3.2.25",
     "vue-router": "^4.0.14",
-    "vuex": "^4.0.2"
+    "vuex": "^4.0.2",
+    "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.6",

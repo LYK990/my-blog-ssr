@@ -11,6 +11,7 @@ import '@/style/resetcss.css';
 // // 代码高亮
 // import 'prismjs/components/prism-json';
 // 选择使用主题
+import { sync } from 'vuex-router-sync';
 import createSSRRouter from './router/index';
 import { key, createSSRStore } from './store';
 import App from './App.vue';
@@ -25,6 +26,7 @@ export default function createApp() {
   const app = createSSRApp(App);
   const store = createSSRStore();
   const router = createSSRRouter();
+  sync(store, router);
   app.use(router);
   app.use(store, key);
   // app.use(VMdPreview);

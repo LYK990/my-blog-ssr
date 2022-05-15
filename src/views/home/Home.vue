@@ -7,7 +7,7 @@
 
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue';
-import { getCaptcha } from '@/api/index';
+// import { getCaptcha } from '@/api/index';
 import HomeOne from './homeOne/HomeOne.vue';
 // import HomeTwo from './homeTwo/HomeTwo.vue';
 
