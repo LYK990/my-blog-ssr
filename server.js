@@ -1,34 +1,48 @@
 const fs = require('fs');
 const path = require('path');
-const express = require('express');
+const Koa = require('koa');
 const serverStatic = require('serve-static');
 const { createServer: createViteServer } = require('vite');
+const koaConnect = require('koa-connect');
 
 const isProd = process.env.NODE_ENV === 'production';
 async function createServer() {
-  const app = express();
-
+  const app = new Koa();
+  // 创建 vite 服务
+  // const viteServer = await vite.createServer({
+  //   root: process.cwd(),
+  //   logLevel: 'error',
+  //   server: {
+  //     middlewareMode: true
+  //   }
+  // });
+  // 注册 vite 的 Connect 实例作为中间件（注意：vite.middlewares 是一个 Connect 实例）
+  // app.use(koaConnect(viteServer.middlewares));
   // 以中间件模式创建 Vite 应用，这将禁用 Vite 自身的 HTML 服务逻辑
   // 并让上级服务器接管控制
   //
   // 如果你想使用 Vite 自己的 HTML 服务逻辑（将 Vite 作为
   // 一个开发中间件来使用），那么这里请用 'html'
   const vite = await createViteServer({
-    server: { middlewareMode: 'ssr' }
+    root: process.cwd(),
+    logLevel: 'error',
+    server: {
+      middlewareMode: 'ssr'
+    }
   });
-  if (isProd) {
+  if (!isProd) {
     // 使用 vite 的 Connect 实例作为中间件
-    app.use(vite.middlewares);
+    app.use(koaConnect(vite.middlewares));
   } else {
     app.use(serverStatic(path.resolve(__dirname, 'dist/client')));
   }
 
-  app.use('*', async (req, res) => {
-    const url = req.originalUrl;
+  app.use(async (ctx) => {
+    const url = ctx.request.originalUrl;
     let template;
     let render;
     try {
-      if (isProd) {
+      if (!isProd) {
         // 1. 读取 index.html
         template = fs.readFileSync(path.resolve(__dirname, 'index.html'), 'utf-8');
 
@@ -65,13 +79,16 @@ async function createServer() {
         .replace('<!--vuex-state-->', JSON.stringify(state));
 
       // 6. 返回渲染后的 HTML。
-      res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
+      ctx.response.status = 200;
+      ctx.type = 'text/html';
+      ctx.body = html;
     } catch (e) {
       // 如果捕获到了一个错误，让 Vite 来修复该堆栈，这样它就可以映射回
       // 你的实际源码中。
       vite.ssrFixStacktrace(e);
-      console.error(e);
-      res.status(500).end(e.message);
+      console.log(e);
+      // ctx.response.status() = 500;
+      ctx.throw(500, e.stack);
     }
   });
 

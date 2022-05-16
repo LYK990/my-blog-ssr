@@ -1,3 +1,6 @@
+/* eslint-disable no-else-return */
+/* eslint-disable prettier/prettier */
+/* eslint-disable consistent-return */
 import { renderToString } from 'vue/server-renderer';
 import createApp from '@/main';
 
@@ -10,9 +13,9 @@ export async function render(url: string, manifest: any) {
   const matchedComponents = router.currentRoute.value.matched.flatMap((record) =>
     Object.values(record.components)
   );
-  console.log('匹配组件', matchedComponents);
   await Promise.all(
     // eslint-disable-next-line consistent-return
+    // eslint-disable-next-line array-callback-return
     matchedComponents.map((Component: any) => {
       if (Component.asyncData) {
         return Component.asyncData({
@@ -23,15 +26,32 @@ export async function render(url: string, manifest: any) {
     })
   );
   const context: any = {};
-  const apphtml = await renderToString(app, context);
+  const appHtml = await renderToString(app, context);
 
   const { state } = store;
 
   function renderPreloadLink(file: any) {
-    if (file.endWith('.js')) {
-      console.log('renderPreloadLink--entry-server');
+    if (file.endsWith(".js")) {
+      return `<link rel="modulepreload" crossorigin href="${file}">`;
+    } else if (file.endsWith(".css")) {
+      return `<link rel="stylesheet" href="${file}">`;
+    } else if (file.endsWith(".woff")) {
+      return ` <link rel="preload" href="${file}" as="font" type="font/woff" crossorigin>`;
+    } else if (file.endsWith(".woff2")) {
+      return ` <link rel="preload" href="${file}" as="font" type="font/woff2" crossorigin>`;
+    } else if (file.endsWith(".gif")) {
+      return ` <link rel="preload" href="${file}" as="image" type="image/gif">`;
+    } else if (file.endsWith(".jpg") || file.endsWith(".jpeg")) {
+      return ` <link rel="preload" href="${file}" as="image" type="image/jpeg">`;
+    } else if (file.endsWith(".png")) {
+      return ` <link rel="preload" href="${file}" as="image" type="image/png">`;
+    } else {
+      // TODO
+      // eslint-disable-next-line prettier/prettier
+      return "";
     }
   }
+
   // eslint-disable-next-line no-shadow
   function renderLinks(modules: any, manifest: any) {
     let links = '';
@@ -45,11 +65,12 @@ export async function render(url: string, manifest: any) {
     });
     return links;
   }
+
   if (import.meta.env.PROD) {
     const preloadLinks = renderLinks(context.modules, manifest);
-    return { apphtml, state, preloadLinks };
+    return { appHtml, state, preloadLinks };
     // eslint-disable-next-line no-else-return
   } else {
-    return { apphtml, state };
+    return { appHtml, state };
   }
 }

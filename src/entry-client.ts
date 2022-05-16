@@ -9,13 +9,14 @@ router.isReady().then(() => {
       .resolve(to)
       .matched.flatMap((record) => Object.values(record.components));
     const fromComponents = router
-      .resolve(to)
+      .resolve(from)
       .matched.flatMap((record) => Object.values(record.components));
     const actived = toComponents.filter((c, i) => {
       return fromComponents[i] !== c;
     });
     if (!actived.length) {
       return next();
+      // eslint-disable-next-line no-else-return
     }
     Promise.all(
       actived.map((Component: any) => {
@@ -30,11 +31,12 @@ router.isReady().then(() => {
       next();
     });
   });
-
   app.mount('#app');
 });
 
+// eslint-disable-next-line no-underscore-dangle
 if (window.__INITIAL_STATE__) {
+  // eslint-disable-next-line no-underscore-dangle
   store.replaceState(window.__INITIAL_STATE__);
 }
 // router.beforeEach(() => {
