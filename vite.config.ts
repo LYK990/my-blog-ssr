@@ -1,25 +1,11 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
-// vite.config.ts
-// import AutoImport from 'unplugin-auto-import/vite';
-// import Components from 'unplugin-vue-components/vite';
-// import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import VueSetupExtend from 'vite-plugin-vue-setup-extend';
 import viteCompression from 'vite-plugin-compression';
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    vue(),
-    VueSetupExtend(),
-    viteCompression()
-    // AutoImport({
-    //   resolvers: [ElementPlusResolver()]
-    // }),
-    // Components({
-    //   resolvers: [ElementPlusResolver()]
-    // })
-  ],
+  plugins: [vue(), VueSetupExtend(), viteCompression()],
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src') // 设置@ 指向 src目录

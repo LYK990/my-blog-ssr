@@ -12,11 +12,12 @@ import '@/style/resetcss.css';
 // import 'prismjs/components/prism-json';
 // 选择使用主题
 // import { sync } from 'vuex-router-sync';
+import ElementPlus from 'element-plus';
 import createSSRRouter from './router/index';
 import { key, createSSRStore } from './store';
 import App from './App.vue';
 import Header from '@/components/header/Header.vue';
-
+import 'element-plus/dist/index.css';
 // VMdPreview.use(vuepressTheme, {
 //   Prism
 // });
@@ -30,7 +31,7 @@ export default function createApp() {
   app.use(router);
   app.use(store, key);
   // app.use(VMdPreview);
+  app.use(ElementPlus);
   app.component('Header', Header);
-
   return { app, router, store };
 }
