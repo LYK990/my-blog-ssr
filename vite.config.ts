@@ -28,9 +28,9 @@ export default defineConfig({
   },
   base: './', // 设置打包路径
   server: {
-    port: 4000, // 端口号
-    open: false, // 是否自动打开浏览器
-    cors: true, // 允许跨域
+    // port: 4000, // 端口号
+    // open: false, // 是否自动打开浏览器
+    // cors: true, // 允许跨域
     hmr: true,
     // 设置代理，根据我们项目实际情况配置
     proxy: {

@@ -31,7 +31,7 @@ router.isReady().then(() => {
       next();
     });
   });
-  app.mount('#app');
+  app.mount('#app', true);
 });
 
 // eslint-disable-next-line no-underscore-dangle

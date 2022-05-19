@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const Koa = require('koa');
 const serverStatic = require('serve-static');
-const { createServer: createViteServer } = require('vite');
+const Vite = require('vite');
 const koaConnect = require('koa-connect');
 
 const isProd = process.env.NODE_ENV === 'production';
@@ -23,9 +23,9 @@ async function createServer() {
   //
   // 如果你想使用 Vite 自己的 HTML 服务逻辑（将 Vite 作为
   // 一个开发中间件来使用），那么这里请用 'html'
-  const vite = await createViteServer({
+  const vite = await Vite.createServer({
     root: process.cwd(),
-    logLevel: 'error',
+    logLevel: 'info', // 控制台打印级别
     server: {
       middlewareMode: 'ssr'
     }
@@ -33,12 +33,14 @@ async function createServer() {
   if (!isProd) {
     // 使用 vite 的 Connect 实例作为中间件
     app.use(koaConnect(vite.middlewares));
+    // app.use(vite.middlewares)
   } else {
     app.use(serverStatic(path.resolve(__dirname, 'dist/client')));
   }
 
   app.use(async (ctx) => {
-    const url = ctx.request.originalUrl;
+    // const url = ctx.request.originalUrl;
+    const url = ctx.path;
     let template;
     let render;
     try {
@@ -71,7 +73,6 @@ async function createServer() {
       // eslint-disable-next-line global-require
       const manifest = require('./dist/client/ssr-manifest.json');
       const { appHtml, state, preloadLinks } = await render(url, manifest);
-
       // 5. 注入渲染后的应用程序 HTML 到模板中。
       const html = template
         .replace('<!--preload-links-->', preloadLinks)
@@ -85,7 +86,8 @@ async function createServer() {
     } catch (e) {
       // 如果捕获到了一个错误，让 Vite 来修复该堆栈，这样它就可以映射回
       // 你的实际源码中。
-      vite.ssrFixStacktrace(e);
+      // eslint-disable-next-line no-unused-expressions
+      vite && vite.ssrFixStacktrace(e);
       console.log(e);
       // ctx.response.status() = 500;
       ctx.throw(500, e.stack);

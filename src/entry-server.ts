@@ -1,7 +1,7 @@
 /* eslint-disable no-else-return */
 /* eslint-disable prettier/prettier */
 /* eslint-disable consistent-return */
-import { renderToString } from 'vue/server-renderer';
+import { renderToString } from '@vue/server-renderer';
 import createApp from '@/main';
 
 // eslint-disable-next-line import/prefer-default-export
