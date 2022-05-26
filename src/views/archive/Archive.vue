@@ -24,7 +24,9 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'Archive',
-  asyncData({ store, route }: any) {}
+  asyncData({ store, route }: any) {
+    console.log(store, route);
+  }
 });
 </script>
 <style lang="less" scoped>

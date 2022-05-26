@@ -21,4 +21,3 @@ export const login = (data: { account: string; pwd: string; imgcode: string }) =
     data
   });
 };
-

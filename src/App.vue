@@ -1,5 +1,5 @@
 <template>
-  <div class="app">
+  <div id="app">
     <router-view />
   </div>
 </template>
@@ -7,7 +7,7 @@
 <script lang="ts" setup name="App"></script>
 
 <style lang="less" scoped>
-.app {
+#app {
   cursor: pointer;
   -moz-user-select: none;
   -ms-user-select: none;
