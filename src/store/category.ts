@@ -10,7 +10,8 @@ const category = createStore({
   },
   mutations: {
     setArticle(state: any)
-  }
+  },
+   actions: {}
 });
 
 export default category;

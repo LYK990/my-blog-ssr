@@ -5,13 +5,9 @@
         <!-- aside -->
         <el-aside width="460px">
           <!-- 折叠面板 -->
-          <el-collapse
-            v-model="activeNames"
-            v-for="(articleCategory, id) in articleCategorys"
-            :key="id"
-          >
+          <el-collapse v-for="(articleCategory, _id) in state.articleCategorys" :key="_id">
             <div class="title">
-              <span>{{ articleCategory }}</span>
+              <span>{{ articleCategory.ArticleCategory }}</span>
             </div>
             <el-collapse-item title="flex布局" name="1">
               <div class="article">
@@ -30,15 +26,15 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onBeforeMount } from 'vue';
+import { onMounted, reactive } from 'vue';
 import { getArticleCategory, getArticle } from '@/api/category';
 
-let articleCategorys: any;
-onBeforeMount(async () => {
-  articleCategorys = await getArticleCategory();
-  console.log(articleCategorys);
+const state: any = reactive({
+  articleCategorys: ''
 });
-const activeNames = ref(''); // 折叠面板
+onMounted(async () => {
+  state.articleCategorys = await getArticleCategory();
+});
 </script>
 <style lang="less" scoped>
 .el-aside {
