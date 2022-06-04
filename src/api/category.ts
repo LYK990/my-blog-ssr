@@ -22,3 +22,15 @@ export const getArticle = () => {
     // responseType: 'blob'
   });
 };
+
+/**
+ * @router Get /api/category/queryArticleTitle
+ * @desc 获取文章title
+ */
+export const queryArticleTitle = (data: any) => {
+  return request({
+    method: 'POST',
+    url: '/api/category/queryArticleTitle',
+    data
+  });
+};

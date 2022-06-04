@@ -6,19 +6,22 @@
         <el-aside width="460px">
           <!-- 折叠面板 -->
           <el-collapse v-for="(articleCategory, _id) in state.articleCategorys" :key="_id">
-            <div class="title">
-              <span>{{ articleCategory.ArticleCategory }}</span>
-            </div>
-            <el-collapse-item title="flex布局" name="1">
-              <div class="article">
-                <a href="##">1.模块化方案</a>
+            <el-collapse-item :title="articleCategory.ArticleCategory" class="title" name="_id">
+              <div class="article" v-for="title in state.titles" :key="title._id">
+                <a
+                  @click="contentAction(title.title)"
+                  v-if="title.ArticleCategory == articleCategory.ArticleCategory"
+                  >{{
+                    title.ArticleCategory == articleCategory.ArticleCategory ? title.title : ''
+                  }}</a
+                >
               </div>
             </el-collapse-item>
           </el-collapse>
         </el-aside>
         <!-- 文章区域 -->
         <el-main>
-          <!-- <v-md-preview :text="str" /> -->
+          <v-md-preview :text="str" />
         </el-main>
       </el-container>
     </div>
@@ -26,15 +29,29 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, reactive } from 'vue';
-import { getArticleCategory, getArticle } from '@/api/category';
+import { onMounted, reactive, ref } from 'vue';
+import { getArticleCategory, queryArticleTitle } from '@/api/category';
 
 const state: any = reactive({
-  articleCategorys: ''
+  articleCategorys: '',
+  titles: []
 });
+const str = ref('');
 onMounted(async () => {
   state.articleCategorys = await getArticleCategory();
+  const data = state.articleCategorys;
+  const result = await queryArticleTitle(data);
+  result.map((item: any) => {
+    state.titles.push(item);
+  });
 });
+const contentAction = async (data: any) => {
+  console.log(state.titles, data);
+  const result = state.titles.filter((item: any) => {
+    return item.title === data;
+  });
+  str.value = result[0].content;
+};
 </script>
 <style lang="less" scoped>
 .el-aside {
@@ -54,7 +71,7 @@ onMounted(async () => {
   .el-aside {
     padding: 1.5rem 0;
     border-right: 1px solid #eaecef;
-    .title {
+    :deep(.el-collapse-item__header) {
       font-size: 1.1em;
       line-height: 1.7;
       font-weight: 700;
@@ -67,14 +84,14 @@ onMounted(async () => {
       border-left: 0.25rem solid transparent;
     }
     .el-collapse-item {
-      opacity: 0.5;
-      font-size: 0.95em;
-      line-height: 1.4;
-      font-weight: 400;
-      padding-left: 2rem;
+      // opacity: 0.5;
+      // font-size: 0.95em;
+      // line-height: 1.4;
+      // font-weight: 400;
+      // padding-left: 2rem;
       .article {
         a {
-          font-size: 1em;
+          font-size: 16px;
           font-weight: 400;
           display: inline-block;
           color: #2a5d91;
