@@ -12,10 +12,10 @@
       <div @click="shareAction">分享</div>
     </div>
     <div class="right">
-      <div class="login">
+      <div class="login" @click="$router.push('/login')">
         <a>登录</a>
       </div>
-      <div class="register">
+      <div class="register" @click="$router.push('/regiser')">
         <a>注册</a>
       </div>
     </div>

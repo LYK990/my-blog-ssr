@@ -46,7 +46,6 @@ onMounted(async () => {
   });
 });
 const contentAction = async (data: any) => {
-  console.log(state.titles, data);
   const result = state.titles.filter((item: any) => {
     return item.title === data;
   });

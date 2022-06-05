@@ -4,6 +4,8 @@ import 'nprogress/nprogress.css'; // npm i @types/nprogress类型补充
 import category from './modules/category';
 import archive from './modules/archive';
 import share from './modules/share';
+import login from './modules/login';
+import register from './modules/register';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -13,7 +15,9 @@ const routes: Array<RouteRecordRaw> = [
   },
   ...category,
   ...archive,
-  ...share
+  ...share,
+  ...login,
+  ...register
 ];
 
 export default function createSSRRouter() {
@@ -26,9 +30,9 @@ export default function createSSRRouter() {
 const router = createSSRRouter();
 
 router.beforeEach(() => {
-  // nprogress.start();
+  nprogress.start();
 });
 
 router.afterEach(() => {
-  // nprogress.done();
+  nprogress.done();
 });
