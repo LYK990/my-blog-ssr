@@ -18,15 +18,13 @@ import { ref } from 'vue';
 import { ElMessage } from 'element-plus';
 import { useRouter } from 'vue-router';
 import { apilogin } from '@/api/users';
-import { setItem } from '@/utils/storage';
 
-const userName = ref('');
-const password = ref('');
+const userName = ref('lyk');
+const password = ref('123456');
 const router = useRouter();
 const submit = async () => {
   const data = { userName, password };
   const result = await apilogin(data);
-  setItem('blogToken', result.token);
   if (result.code == 200) {
     router.push('/');
     ElMessage.success('登录成功');

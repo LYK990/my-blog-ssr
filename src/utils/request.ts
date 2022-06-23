@@ -1,5 +1,6 @@
 import Axios, { AxiosRequestConfig } from 'axios';
 import { ElMessage } from 'element-plus';
+import { setItem, getItem } from '@/utils/storage';
 
 const request = Axios.create({
   baseURL: import.meta.env.VITE_API_BASEURL,
@@ -8,7 +9,13 @@ const request = Axios.create({
 
 // 前置拦截器（发起请求之前的拦截）
 request.interceptors.request.use(
-  (response) => response,
+  (req: any) => {
+    const token = getItem('blogToken');
+    if (token != null) {
+      req.headers.token = token;
+    }
+    return req;
+  },
   (error) => Promise.reject(error)
 );
 
@@ -19,13 +26,17 @@ request.interceptors.response.use(
       ElMessage.error(response.data.msg || '请求失败 请稍后重试');
       return Promise.reject(response.data);
     }
+    if (response.data.token) {
+      setItem('blogToken', response.data.token);
+    }
     return response;
   },
   (error) => {
     if (error.response && error.response.data) {
       const code = error.response.status;
       const msg = error.response.data.message;
-      ElMessage.error(`Code: ${code}, Message: ${msg}`);
+      // ElMessage.error(`Code: ${code}, Message: ${msg}`);
+      ElMessage.error(`${msg}`);
     } else {
       ElMessage.error(`${error}`);
     }
