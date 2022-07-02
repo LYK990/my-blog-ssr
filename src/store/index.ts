@@ -1,27 +1,24 @@
 import { createStore, useStore as baseUseStore, Store } from 'vuex';
+import user from './modules/user';
 import { InjectionKey } from 'vue';
 
 export interface State {
+user: any;
   count: number;
-  isCollapse: boolean;
+  // abpRole: [];
 }
-
-export const key: InjectionKey<Store<State>> = Symbol(1);
+// 定义 injection key
+export const key: InjectionKey<Store<State>> = Symbol('storeKey');
 
 export function createSSRStore() {
   return createStore({
-    state() {
-      return {
-        count: 1,
-        isCollpase: false
-      };
-    },
-    mutations: {
-      setIsCollapse(state: any, payload: any) {
-        state.isCollapse = payload;
-      }
-    },
-    actions: {}
+    state: {},
+    mutations: {},
+    actions: {},
+    getters: {},
+    modules: {
+      user
+    }
   });
 }
 

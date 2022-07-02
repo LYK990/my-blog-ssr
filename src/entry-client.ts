@@ -16,9 +16,6 @@ router.isReady().then(() => {
     });
     if (!actived.length) {
       return next();
-      // eslint-disable-next-line no-else-return
-    } else {
-      next();
     }
     Promise.all(
       actived.map((Component: any) => {
@@ -30,7 +27,7 @@ router.isReady().then(() => {
         }
       })
     ).then(() => {
-      // next();
+      next();
     });
   });
   app.mount('#app', true);

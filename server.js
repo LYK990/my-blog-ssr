@@ -4,6 +4,7 @@ const Koa = require('koa');
 const serverStatic = require('serve-static');
 const Vite = require('vite');
 const koaConnect = require('koa-connect');
+const sendFile = require('koa-send');
 
 const isProd = process.env.NODE_ENV === 'production';
 async function createServer() {
@@ -65,6 +66,13 @@ async function createServer() {
         //    并提供类似 HMR 的根据情况随时失效。
         // eslint-disable-next-line global-require
         render = require('./dist/server/entry-server').render;
+        const resolve = (p) => path.resolve(__dirname, p);
+        const clientRoot = resolve(__dirname, p);
+        if (ctx.path.startsWith('/assets')) {
+          await sendFile(ctx, ctx.path , {
+            root: clientRoot
+          })
+        }
       }
 
       // 4. 渲染应用的 HTML。这假设 entry-server.js 导出的 `render`
@@ -77,7 +85,7 @@ async function createServer() {
       const html = template
         .replace('<!--preload-links-->', preloadLinks)
         .replace('<!--ssr-outlet-->', appHtml)
-        .replace('<!--vuex-state-->', JSON.stringify(state));
+        .replace("'<!--vuex-state-->'", JSON.stringify(state));
 
       // 6. 返回渲染后的 HTML。
       ctx.response.status = 200;
@@ -88,7 +96,6 @@ async function createServer() {
       // 你的实际源码中。
       // eslint-disable-next-line no-unused-expressions
       vite && vite.ssrFixStacktrace(e);
-      console.log(e);
       // ctx.response.status() = 500;
       ctx.throw(500, e.stack);
     }

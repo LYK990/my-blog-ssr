@@ -16,6 +16,10 @@
         >
       </div>
       <el-button @click="submit" type="primary" size="large" style="width: 100%">注册</el-button>
+      <div class="footer">
+        <div @click="$router.push('/')">回首页</div>
+        <div @click="$router.push('/login')">登录</div>
+      </div>
     </el-card>
   </div>
 </template>
@@ -24,11 +28,11 @@
 import { ref } from 'vue';
 import { ElMessage } from 'element-plus';
 import { apiverificationCode, apiregister } from '@/api/users';
-
+import { useRouter } from 'vue-router';
 const userName = ref('');
 const password1 = ref('');
-// const password2 = ref('');
 const verification = ref('');
+const router = useRouter()
 const validationAction = async () => {
   const result = await apiverificationCode();
   verification.value = result;
@@ -38,6 +42,7 @@ const submit = async () => {
   const result = await apiregister(data);
   if (result.code == 200) {
     ElMessage.success('注册成功');
+    router.push('/login')
   }
 };
 </script>
@@ -71,6 +76,11 @@ const submit = async () => {
       color: rgb(27, 26, 26);
       font-size: 16px;
     }
+  }
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
   }
 }
 </style>

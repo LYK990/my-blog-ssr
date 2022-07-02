@@ -21,7 +21,7 @@
         </el-aside>
         <!-- 文章区域 -->
         <el-main>
-          <v-md-preview :text="str" />
+           <v-md-preview :text="str" />
         </el-main>
       </el-container>
     </div>

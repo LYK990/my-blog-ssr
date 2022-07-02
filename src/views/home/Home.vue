@@ -19,10 +19,6 @@ export default defineComponent({
   },
   // setup() {},
   asyncData({ store, route }: any) {
-    // onMounted(async () => {
-    //   const result = await getCaptcha();
-    //   console.log(result);
-    // });
   }
 });
 </script>

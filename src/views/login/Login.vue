@@ -9,27 +9,55 @@
       <el-input size="large" v-model="userName" placeholder="请输入用户名" />
       <el-input size="large" v-model="password" placeholder="请输入密码" />
       <el-button @click="submit" type="primary" size="large" style="width: 100%">登录</el-button>
+      <div class="footer">
+        <div @click="$router.push('/')">回首页？</div>
+        <div @click="$router.push('/regiser')">注册？</div>
+      </div>
     </el-card>
   </div>
 </template>
 
-<script lang="ts" setup name="Login">
-import { ref } from 'vue';
+<script lang="ts">
+import { ref, defineComponent } from 'vue';
+import { useStore } from '@/store';
 import { ElMessage } from 'element-plus';
 import { useRouter } from 'vue-router';
 import { apilogin } from '@/api/users';
 
-const userName = ref('lyk');
-const password = ref('123456');
-const router = useRouter();
-const submit = async () => {
-  const data = { userName, password };
-  const result = await apilogin(data);
-  if (result.code == 200) {
-    router.push('/');
-    ElMessage.success('登录成功');
+export default defineComponent({
+  name: 'Login',
+  asyncData({ store, route }: any) {
+    // return store.dispatch('user/abpRolePersmission', 121);
+  },
+  setup() {
+    const store = useStore();
+    const userName = ref('lyk');
+    const password = ref('123456');
+    const router = useRouter();
+    const submit = async () => {
+      const data = { userName, password };
+      const result = await apilogin(data);
+      // store.commit('user/abpRoleSet', { abpRole: result.abpRole });
+      store.dispatch('user/abpRolePersmission', result.abpRole);
+      if (result.code == 200) {
+        router.push('/');
+        ElMessage.success('登录成功');
+      } else if (!result?.code) {
+        ElMessage({
+          message: `${result.email}`,
+          type: 'success'
+        });
+      }
+    };
+    return {
+      store,
+      userName,
+      password,
+      router,
+      submit
+    };
   }
-};
+});
 </script>
 <style lang="less" scoped>
 .login {
@@ -60,6 +88,11 @@ const submit = async () => {
       color: rgb(27, 26, 26);
       font-size: 16px;
     }
+  }
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
   }
 }
 </style>

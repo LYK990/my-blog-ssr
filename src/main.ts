@@ -11,10 +11,10 @@ import Prism from 'prismjs';
 // 代码高亮
 import 'prismjs/components/prism-json';
 // 选择使用主题
-// import { sync } from 'vuex-router-sync';
+import { sync } from 'vuex-router-sync';
 import ElementPlus from 'element-plus';
 import createSSRRouter from './router/index';
-import { key, createSSRStore } from './store';
+import { createSSRStore, key } from './store';
 import App from './App.vue';
 import Header from '@/components/header/Header.vue';
 import 'element-plus/dist/index.css';
@@ -28,7 +28,7 @@ export default function createApp() {
   const app = createSSRApp(App);
   const store = createSSRStore();
   const router = createSSRRouter();
-  // sync(store, router);
+  sync(store, router);
   app.use(router);
   app.use(store, key);
   app.use(VMdPreview);

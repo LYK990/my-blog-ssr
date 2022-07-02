@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "serve": "vite",
+    "serve": "cross-env NODE_ENV=development node server.js",
     "dev:ssr": "cross-env NODE_ENV=development node server.js",
     "prod:ssr": "cross-env NODE_ENV=production node server.js",
     "build:client": "vite build --outDir dist/client --ssrManifest",
@@ -29,6 +29,7 @@
     "element-plus": "^2.1.8",
     "koa": "^2.13.4",
     "koa-connect": "^2.1.0",
+    "koa-send": "^5.0.1",
     "nprogress": "^0.2.0",
     "vue": "^3.2.25",
     "vue-router": "^4.0.14",

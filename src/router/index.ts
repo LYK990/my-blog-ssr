@@ -13,12 +13,35 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Home',
     component: () => import('@/views/home/Home.vue')
   },
+  {
+    path: '/404',
+    name: '404',
+    component: () => import('@/views/404/404.vue')
+  },
   ...category,
   ...archive,
   ...share,
   ...login,
+  ...register,
+  {
+    path: '/:pathMatch(.*)',
+    redirect: '/404'
+  }
+];
+// 常量路由
+export const constantRoutes: Array<RouteRecordRaw> = [
+  {
+    path: '/',
+    name: 'Home',
+    component: () => import('@/views/home/Home.vue')
+  },
+  ...login,
   ...register
 ];
+// 异步路由
+export const allAsyncRoutes: Array<RouteRecordRaw> = [...archive, ...share, ...category];
+// 任意路由
+export const anyRoute: Array<RouteRecordRaw> = [{ path: '*', redirect: '/404' }];
 
 export default function createSSRRouter() {
   return createRouter({
@@ -27,7 +50,7 @@ export default function createSSRRouter() {
   });
 }
 
-const router = createSSRRouter();
+export const router = createSSRRouter();
 
 router.beforeEach(() => {
   nprogress.start();

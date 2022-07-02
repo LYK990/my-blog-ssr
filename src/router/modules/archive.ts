@@ -6,7 +6,7 @@ const routes: RouteRecordRaw[] = [
     name: 'Archive',
     component: () => import('@/views/archive/Archive.vue'), // 父路由组件路径不能为空
     meta: {
-      title: '商品'
+      title: '归档'
     }
   }
 ];

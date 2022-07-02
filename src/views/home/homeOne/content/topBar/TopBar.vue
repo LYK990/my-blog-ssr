@@ -22,19 +22,41 @@
   </header>
 </template>
 
-<script lang="ts" setup name="TopBar">
-import { useRouter } from 'vue-router';
+<script lang="ts">
+import { defineComponent } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
+import { onMounted } from 'vue';
+import { useStore } from '@/store';
 
-const router = useRouter();
-const categoryAction = () => {
-  router.push({ path: '/category' });
-};
-const archiveAction = () => {
-  router.push({ path: '/archive' });
-};
-const shareAction = () => {
-  router.push({ path: '/share' });
-};
+export default defineComponent({
+  name: 'TopBar',
+  asyncData({ store, route }: any) {
+    console.log(1111111)
+    // return store.dispatch('user/abpRolePersmission', 121);
+  },
+  setup() {
+    onMounted(() => {
+      const route = useRoute();
+      const store = useStore();
+      console.log(store.state.user.routes);
+    });
+    const router = useRouter();
+    const categoryAction = () => {
+      router.push({ path: '/category' });
+    };
+    const archiveAction = () => {
+      router.push({ path: '/archive' });
+    };
+    const shareAction = () => {
+      router.push({ path: '/share' });
+    };
+    return {
+      categoryAction,
+      archiveAction,
+      shareAction
+    };
+  }
+});
 </script>
 <style lang="less" scoped>
 @import url('@/style/home/topBar/topBar.less');
