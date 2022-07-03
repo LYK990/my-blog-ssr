@@ -4,7 +4,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/category',
     name: 'Category',
-    component: () => import('@/views/category/Category.vue'), // 父路由组件路径不能为空
+    component: () => import('@/views/category/Category.vue'),
     meta: {
       title: '分类'
     }

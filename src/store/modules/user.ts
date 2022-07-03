@@ -35,7 +35,11 @@ const mutations = {
   setRoutes(state: object | any, allAsyncRoutes: Array<RouteRecordRaw>) {
     state.routes = allAsyncRoutes.concat(constantRoutes, anyRoute);
     // 动态添加注册路由
-    router.addRoute([...allAsyncRoutes, ...anyRoute]);
+    // router.addRoute([...allAsyncRoutes, ...anyRoute]);
+    const allRoutes = [...allAsyncRoutes, ...anyRoute];
+    allRoutes.forEach((item) => {
+      router.addRoute(item);
+    });
   }
 };
 const actions = {

@@ -4,9 +4,8 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import('@/views/login/Login.vue'), // 父路由组件路径不能为空
+    component: () => import('@/views/login/Login.vue'),
     meta: {
-      title: '商品'
     }
   }
 ];

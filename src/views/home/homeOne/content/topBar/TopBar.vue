@@ -7,9 +7,11 @@
     </div>
     <div class="center">
       <div>首页</div>
-      <div @click="categoryAction">分类</div>
-      <div @click="archiveAction">归档</div>
-      <div @click="shareAction">分享</div>
+      <template v-for="(item, index) in routeMetaTitle" :key="index">
+        <div v-if="!!item.meta?.title" @click="routePush(item)">
+          {{ item.meta?.title }}
+        </div></template
+      >
     </div>
     <div class="right">
       <div class="login" @click="$router.push('/login')">
@@ -25,35 +27,20 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-import { onMounted } from 'vue';
-import { useStore } from '@/store';
 
 export default defineComponent({
   name: 'TopBar',
   asyncData({ store, route }: any) {
-    console.log(1111111)
-    // return store.dispatch('user/abpRolePersmission', 121);
   },
-  setup() {
-    onMounted(() => {
-      const route = useRoute();
-      const store = useStore();
-      console.log(store.state.user.routes);
-    });
+  setup() { 
     const router = useRouter();
-    const categoryAction = () => {
-      router.push({ path: '/category' });
-    };
-    const archiveAction = () => {
-      router.push({ path: '/archive' });
-    };
-    const shareAction = () => {
-      router.push({ path: '/share' });
+    const routeMetaTitle = router.options.routes;
+    const routePush = (item: any) => {
+      router.push(item.path);
     };
     return {
-      categoryAction,
-      archiveAction,
-      shareAction
+      routePush,
+      routeMetaTitle
     };
   }
 });

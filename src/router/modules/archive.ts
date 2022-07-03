@@ -4,7 +4,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/archive',
     name: 'Archive',
-    component: () => import('@/views/archive/Archive.vue'), // 父路由组件路径不能为空
+    component: () => import('@/views/archive/Archive.vue'),
     meta: {
       title: '归档'
     }

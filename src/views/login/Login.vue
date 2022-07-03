@@ -27,7 +27,6 @@ import { apilogin } from '@/api/users';
 export default defineComponent({
   name: 'Login',
   asyncData({ store, route }: any) {
-    // return store.dispatch('user/abpRolePersmission', 121);
   },
   setup() {
     const store = useStore();
@@ -37,7 +36,6 @@ export default defineComponent({
     const submit = async () => {
       const data = { userName, password };
       const result = await apilogin(data);
-      // store.commit('user/abpRoleSet', { abpRole: result.abpRole });
       store.dispatch('user/abpRolePersmission', result.abpRole);
       if (result.code == 200) {
         router.push('/');

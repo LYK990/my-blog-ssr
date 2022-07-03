@@ -4,7 +4,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/share',
     name: 'Share',
-    component: () => import('@/views/share/Share.vue'), // 父路由组件路径不能为空
+    component: () => import('@/views/share/Share.vue'),
     meta: {
       title: '分享'
     }
