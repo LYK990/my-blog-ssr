@@ -36,10 +36,4 @@ export default function createSSRRouter() {
 
 export const router = createSSRRouter();
 
-router.beforeEach(() => {
-  nprogress.start();
-});
 
-router.afterEach(() => {
-  nprogress.done();
-});

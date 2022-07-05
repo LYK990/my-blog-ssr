@@ -1,12 +1,7 @@
 export const getItem = <T>(key: string) => {
   const data = window.localStorage.getItem(key);
   if (!data) return null;
-  // try {
-  //   return JSON.parse(data) as T;
-  // } catch (err) {
-  //   return null;
-  // }
-  return data;
+  return data as any;
 };
 
 export const setItem = (key: string, value: object | string | null) => {

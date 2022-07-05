@@ -1,5 +1,6 @@
 import { allAsyncRoutes, constantRoutes, anyRoute, router } from '@/router/index';
 import { RouteRecordRaw } from 'vue-router';
+import { setItem } from '@/utils/storage';
 
 interface IFabpRole {
   archive: Boolean;
@@ -32,20 +33,24 @@ const mutations = {
   abpRoleSet(state: object | any, abpRole: IFabpRole) {
     state.abpRole = abpRole;
   },
-  setRoutes(state: object | any, allAsyncRoutes: Array<RouteRecordRaw>) {
+  async setRoutes(state: object | any, allAsyncRoutes: Array<RouteRecordRaw>) {
     state.routes = allAsyncRoutes.concat(constantRoutes, anyRoute);
+    setItem('topBar', state.routes);
     // 动态添加注册路由
     // router.addRoute([...allAsyncRoutes, ...anyRoute]);
     const allRoutes = [...allAsyncRoutes, ...anyRoute];
     allRoutes.forEach((item) => {
-      router.addRoute(item);
+      router.addRoute(item as unknown as RouteRecordRaw);
     });
   }
 };
 const actions = {
   async abpRolePersmission(context: any, abpRole: IFabpRole) {
     context.commit('abpRoleSet', abpRole);
-    context.commit('setRoutes', filterAsyncRoutes(allAsyncRoutes, abpRole));
+    context.commit(
+      'setRoutes',
+      filterAsyncRoutes(JSON.parse(JSON.stringify(allAsyncRoutes)), abpRole)
+    );
   }
 };
 

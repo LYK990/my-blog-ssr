@@ -25,16 +25,23 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, onMounted, createApp, ref, reactive } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
+import { useStore } from '@/store';
+import { getItem } from '@/utils/storage';
 
 export default defineComponent({
   name: 'TopBar',
-  asyncData({ store, route }: any) {
-  },
-  setup() { 
+  asyncData({ store, route }: any) {},
+
+  setup() {
+    onMounted(() => {
+      // routeMetaTitle = getItem('topBar');
+      console.log(routeMetaTitle);
+    });
     const router = useRouter();
-    const routeMetaTitle = router.options.routes;
+    let routeMetaTitle = router.getRoutes();
+
     const routePush = (item: any) => {
       router.push(item.path);
     };
