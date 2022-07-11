@@ -35,10 +35,7 @@ export default defineComponent({
   asyncData({ store, route }: any) {},
 
   setup() {
-    onMounted(() => {
-      // routeMetaTitle = getItem('topBar');
-      console.log(routeMetaTitle);
-    });
+    onMounted(() => {});
     const router = useRouter();
     let routeMetaTitle = router.getRoutes();
 

@@ -4,7 +4,22 @@
   </div>
 </template>
 
-<script lang="ts" setup name="App"></script>
+<script lang="ts">
+import { defineComponent, onMounted } from 'vue';
+import useWebSocket from '@/utils/websocket';
+
+export default defineComponent({
+  name: 'APP',
+  setup() {
+    onMounted(() => {});
+    const handleMessage: any = () => {
+      console.log('websocket, open');
+    };
+    const ws = useWebSocket(handleMessage);
+    return {};
+  }
+});
+</script>
 
 <style lang="less" scoped>
 #app {
