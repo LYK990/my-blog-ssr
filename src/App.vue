@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue';
-import useWebSocket from '@/utils/websocket';
+// import useWebSocket from '@/utils/websocket';
 
 export default defineComponent({
   name: 'APP',
@@ -15,7 +15,7 @@ export default defineComponent({
     const handleMessage: any = () => {
       console.log('websocket, open');
     };
-    const ws = useWebSocket(handleMessage);
+    // const ws = useWebSocket(handleMessage);
     return {};
   }
 });

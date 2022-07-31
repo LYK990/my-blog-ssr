@@ -7,10 +7,11 @@
     </div>
     <div class="center">
       <div>首页</div>
-      <template v-for="(item, index) in routeMetaTitle" :key="index">
-        <div v-if="!!item.meta?.title" @click="routePush(item)">
-          {{ item.meta?.title }}
-        </div></template
+      <template v-for="(item, index) in routeMetaTitle.topBar" :key="index">
+        <div v-if="!!item?.meta?.title" @click="routePush(item)">
+          {{ item?.meta?.title }}
+        </div>
+        </template
       >
     </div>
     <div class="right">
@@ -25,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, createApp, ref, reactive } from 'vue';
+import { defineComponent, onMounted, createApp, ref, reactive, toRefs } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useStore } from '@/store';
 import { getItem } from '@/utils/storage';
@@ -35,9 +36,13 @@ export default defineComponent({
   asyncData({ store, route }: any) {},
 
   setup() {
-    onMounted(() => {});
+    onMounted(() => {
+      routeMetaTitle.topBar = JSON.parse(window.localStorage.topBar)
+    });
     const router = useRouter();
-    let routeMetaTitle = router.getRoutes();
+    let routeMetaTitle: any = reactive({
+      topBar: []
+    })
 
     const routePush = (item: any) => {
       router.push(item.path);
